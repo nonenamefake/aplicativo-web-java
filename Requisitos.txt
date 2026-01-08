@@ -6,4 +6,4 @@ requisito para programa en visual code:
 -lanjauje support for java by red hat
 -debugger for java
 
-aparte de visual code para que funsione es tener instalado el SDK de java
+aparte de visual code para que funcione es tener instalado el SDK de java
