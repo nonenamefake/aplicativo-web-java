@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/images/techGear.png" alt="Logo de TechGear" class="d-inline-block align-text-top me-2 w-50 h-50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/TerminosCondiciones">Terminos y condiciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/politicas">Politica de privacidad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Find">Productos</a> <!-- Enlace actualizado para la nueva sección -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Carrito">Carrito</a>
+                        </li>
+                        <!-- Login / User dropdown -->
+                        <!-- show login button when NOT authenticated as a client (ROLE_USER) -->
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Registrar">
+                            <i class="fas fa-sign-in-alt me-1"></i>Registrar
+                            </a>
+                        </li>
+
+                        <!-- show user dropdown only when authenticated as a client -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('USER')">
+                            <a class="nav-link dropdown-toggle btn btn-outline-secondary" type="button" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-1" ></i>
+                                <span th:text="${currentUser != null ? currentUser.firstName : #authentication.name}">Usuario</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/mi-cuenta}">Cuenta</a></li>
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/Orders}">Compras</a></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" style="margin:0">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+      <!-- Modal de Login (mantenido igual) -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-white text-white border-tech">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title text-tech" id="loginModalLabel">
+                            <i class="fas fa-user-lock me-2"></i>Iniciar Sesión en TechGear
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email o Usuario</label>
+                                <input type="email" class="form-control bg-secondary text-white" id="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control bg-secondary text-white" id="password" placeholder="••••••••" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label text-light" for="rememberMe">Recordarme</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 tech-btn">Iniciar Sesión</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-tech">¿Olvidaste tu contraseña?</a> | 
+<<<<<<< Updated upstream
+                            <a href="../static/Register.html" class="text-tech" data-bs-toggle="modal" >Crear Cuenta</a>
+=======
+                            <a href="../static/Register.html" class="text-tech"  >Crear Cuenta</a>
+>>>>>>> Stashed changes
+                        </div>
+                        <hr class="my-3">
+                        <p class="text-center text-muted small">Demo: Usuario: admin@techgear.com | Contraseña: 123456</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <main class="py-5">
+        <div class="container">
+            <h1 class="text-center display-4 mb-5 text-primary">Política de Privacidad</h1>
+            <p class="text-muted text-center mb-4">Última actualización: 25 de setiembre de 2025</p>
+
+            <h2 class="h4 text-primary mt-4">1. Recolección de Información Personal</h2>
+            <p>TechGear recopila la siguiente información personal necesaria para la gestión de pedidos, procesamiento de pagos y mejora continua del servicio:</p>
+            <ul class="ms-3 mb-3"> <li>Información de Identificación: Nombre completo, número de documento de identidad (DNI/CE).</li>
+                <li>**Información de Contacto: Dirección de correo electrónico, dirección de envío y facturación, y número de teléfono.</li>
+                <li>**Información de Transacción: Detalles de los productos comprados, historial de pedidos, y datos de pago (que son procesados de forma segura por terceros y no almacenados directamente por nosotros).</li>
+            </ul>
+
+            <h2 class="h4 text-primary mt-4">2. Uso de la Información</h2>
+            <p>La información personal se utiliza exclusivamente para los siguientes fines:</p>
+            <ul class="ms-3 mb-3"> <li>Procesar y cumplir con sus pedidos y transacciones.</li>
+                <li>Comunicarle el estado de su pedido, información de envío y notificaciones importantes.</li>
+                <li>Mejorar la experiencia del usuario y personalizar el contenido del sitio web.</li>
+                <li>Enviar material promocional y ofertas especiales (solo si ha dado su consentimiento explícito).</li>
+                <li>Cumplir con las obligaciones legales y regulatorias aplicables.</li>
+            </ul>
+
+            <h2 class="h4 text-primary mt-4">3. Cookies y Tecnologías de Seguimiento</h2>
+            <p>Utilizamos cookies y tecnologías similares como píxeles y web beacons para:</p>
+            <ul class="ms-3 mb-3"> <li>Mantener el seguimiento de los artículos en su carrito de compras.</li>
+                <li>Analizar el tráfico del sitio y los patrones de uso.</li>
+                <li>Personalizar la publicidad mostrada en nuestro sitio y en plataformas de terceros.</li>
+            </ul>
+            <p>Usted tiene la opción de configurar su navegador para que rechace todas las cookies, aunque esto podría afectar la funcionalidad de algunas partes del Servicio.</p>
+
+            <h2 class="h4 text-primary mt-4">4. Divulgación a Terceros</h2>
+            <p>TechGear no vende, alquila ni intercambia su información personal con terceros. Solo compartimos la información esencial en los siguientes casos:</p>
+            <ul class="ms-3 mb-3"> <li>Proveedores de Servicios: Empresas de envío y logística para la entrega de su pedido.</li>
+                <li>Procesadores de Pago: Entidades bancarias o plataformas de pago seguras (para procesar su transacción).</li>
+                <li>Obligación Legal: Si la ley lo requiere,por ejemplo, a Indecopi o autoridades judiciales.</li>
+            </ul>
+
+            <h2 class="h4 text-primary mt-4">5. Seguridad de la Información</h2>
+            <p>Hemos implementado medidas de seguridad técnicas, administrativas y físicas diseñadas para proteger su información personal contra el acceso no autorizado, la divulgación, el uso indebido o la alteración. Ademas, stas medidas incluyen el cifrado (SSL) en las páginas de pago.</p>
+
+            <h2 class="h4 text-primary mt-4">6. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
+            <p>De acuerdo con la legislación de protección de datos personales, usted tiene derecho a:</p>
+            <ul class="ms-3 mb-3"> <li>**Acceder** a los datos personales que tenemos sobre usted.</li>
+                <li>Solicitar la **Rectificación** de datos inexactos o incompletos.</li>
+                <li>Solicitar la **Cancelación** o supresión de sus datos.</li>
+                <li>**Oponerse** al tratamiento de sus datos para fines específicos, como el *marketing* directo.</li>
+            </ul>
+            <p>Para ejercer cualquiera de estos derechos, por favor, envíe una solicitud formal a nuestro correo de contacto.</p>
+
+            <h2 class="h4 text-primary mt-4">7. Enlaces a Sitios Web de Terceros</h2>
+            <p>Nuestro sitio puede contener enlaces a otros sitios web no operados por nosotros (como fabricantes o reseñas). No somos responsables de las prácticas de privacidad de estos sitios y le recomendamos revisar sus propias políticas.</p>
+
+            <h2 class="h4 text-primary mt-4">8. Cambios de la política de privacidad</h2>
+            <p>Podemos actualizar esta Política de Privacidad periódicamente.Publicaremos la nueva política en esta página e indicaremos la fecha de la última actualización. Los cambios entrarán en vigor tan pronto como se publiquen.</p>
+
+        </div>
+    </main>
+    
+    <footer class="bg-primary mt-auto py-5 pb-2 footer-custom text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Enlaces Importantes</h5>
+                    <ul class="list-unstyled">
+
+                        <li class="mb-2"><a href="/TerminosCondiciones" class="text-decoration-none text-white">Términos y Condiciones</a></li>
+                        <li class="mb-2"><a href="/politicas" class="text-decoration-none text-white">Política de Privacidad</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Libro de Reclamaciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Nosotros</a></li>
+
+                        <li class="mb-2"><a href="/Contacto" class="text-decoration-none text-white">Contácto</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Ver productos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Contáctanos</h5>
+                    <p class="text-white mb-1 small">
+                        Para estado de pedidos o problemas de entrega, escríbenos a: <br>
+                        <a href="mailto:contacto@techgear.com" class="text-decoration-none text-white">contacto@techgear.com</a>
+                    </p>
+
+
+                    <p class="text-white small">Atencion: Lun - Vie 10 AM - 6 PM <br>Sáb: 10:00 - 15:00</p>
+
+                    <p class="text-white mb-1 small">
+                        Cambios y Reemplazos: <br>
+                        <a href="#" class="text-decoration-none text-white fw-bold">Solicitar aquí</a>
+                    </p>
+
+                    <p class="text-white small fst-italic">Nota: Las solicitudes deben hacerse dentro de los 7 días de la entrega.</p>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Sé Parte de TechGear</h5>
+                    <p class="text-white small">Únete para obtener 10% de descuento en tu primera compra y las últimas novedades y ofertas.</p>
+                    
+                    <form class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Introduce tu email" aria-label="Introduce tu email">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+
+                    <div class="social-icons mt-3 text-center">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fa-lg fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fa-lg mx-3 fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-tiktok fa-lg fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3 border-secondary-subtle"> 
+            
+            <div class="row align-items-center ">
+                <div class="container text-center">
+                    <p class="mb-2">&copy; 2023 TechGear. Todos los derechos reservados. </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script src="../static/JavaScript/Login.js"></script>
+    
+</body>
+</html>

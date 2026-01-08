@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="css/AdminLogos.css">
+    <link rel="stylesheet" href="css/bootstrap-admin.css">
+    <link rel="stylesheet" href="css/templatemo-style-admin.css">
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand" href="/Panel_Admin">
+                    <h1 class="tm-site-title mb-0">Panel de administracion</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Panel
+                                <span class="sr-only"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Informe <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">no se que poner</a>
+                                <a class="dropdown-item" href="#">Comentarios</a>
+                                <a class="dropdown-item" href="#">Libro de Reclamacion</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin_Lista_Produstos">
+                                <i class="fas fa-shopping-cart"></i>
+                                Productos
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin_Usuarios">
+                                <i class="far fa-user"></i>
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                                <span>
+                                    Ajustes <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/Admin_Perfil">Modificar perfil</a>
+                                <a class="dropdown-item" href="#">Facturación</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="########">
+                               <b>Cerrar sesión</b>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5">Bienvenido de nuevo, <b>Administrador</b></p>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row tm-content-row">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Últimos éxitos</h2>
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Actuación</h2>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                        <h2 class="tm-block-title">Información de almacenamiento</h2>
+                        <div id="pieChartContainer">
+                            <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
+                        <h2 class="tm-block-title">Lista de notificaciones</h2>
+                        <div class="tm-notification-items">
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2">Se envio correctamente a la persona <p class="nombre"> Jessica</p> <a href="#"
+                                            class="tm-notification-link">actualizaciones de productos</a></p>
+                                    <span class="tm-small tm-text-color-secondary">hace 6 horas.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2">Se envio correctamente al ususario <p class="nombre"> Juan</p> <a href="#"
+                                            class="tm-notification-link">actualizaciones de productos</a></p>
+                                    <span class="tm-small tm-text-color-secondary">hace 6 horas.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2">Se envio correctamente al ususario <p class="nombre"> Carlos</p> <a href="#"
+                                            class="tm-notification-link">actualizaciones de productos</a></p>
+                                    <span class="tm-small tm-text-color-secondary">hace 6 horas.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Laura Cute</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product records</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Samantha</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">order stuffs</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Sophie</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Lily A</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Amara</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                            <div class="media tm-notification-item">
+                                <div class="tm-gray-circle"><img src="/images/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="media-body">
+                                    <p class="mb-2"><b>Cinthela</b> and <b>6 others</b> sent you <a href="#"
+                                            class="tm-notification-link">product updates</a>.</p>
+                                    <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        <h2 class="tm-block-title">Lista de pedidos</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">NÚMERO DE PEDIDO</th>
+                                    <th scope="col">ESTADO</th>
+                                    <th scope="col">OPERADORES</th>
+                                    <th scope="col">UBICACIÓN</th>
+                                    <th scope="col">DISTANIA</th>
+                                    <th scope="col">FECHA DE INICIO</th>
+                                    <th scope="col">ENTREGA ESTIMADA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><b>#122349</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Entregado
+                                    </td>
+                                    <td><b>Oliver Trag</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>485 km</b></td>
+                                    <td>16:00, 12 NOV 2018</td>
+                                    <td>08:00, 18 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pendiente
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+                                    <td>11:00, 10 NOV 2018</td>
+                                    <td>04:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelado
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+                                    <td>12:00, 22 NOV 2018</td>
+                                    <td>06:00, 28 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122349</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Entregado
+                                    </td>
+                                    <td><b>Oliver Trag</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>485 km</b></td>
+                                    <td>16:00, 12 NOV 2018</td>
+                                    <td>08:00, 18 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pendiente
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+                                    <td>11:00, 10 NOV 2018</td>
+                                    <td>04:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelado
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+                                    <td>12:00, 22 NOV 2018</td>
+                                    <td>06:00, 28 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122349</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Entregado
+                                    </td>
+                                    <td><b>Oliver Trag</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>485 km</b></td>
+                                    <td>16:00, 12 NOV 2018</td>
+                                    <td>08:00, 18 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pendiente
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+                                    <td>11:00, 10 NOV 2018</td>
+                                    <td>04:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelado
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+                                    <td>12:00, 22 NOV 2018</td>
+                                    <td>06:00, 28 NOV 2018</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="tm-footer row tm-mt-small">
+            <div class="col-12 font-weight-light">
+                <p class="text-center text-white mb-0 px-4 small">
+                    &copy; <b>2023</b> TechGear. Todos los derechos reservados.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/JavaScript/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="/JavaScript/moment.min.js"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="/JavaScript/Chart.min.js"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <script src="/JavaScript/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="/JavaScript/tooplate-scripts.js"></script>
+    <script>
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM está listo
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Gráfico de barras
+            drawPieChart(); // Gráfico circular
+
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();                
+            });
+        })
+    </script>
+</body>
+
+</html>

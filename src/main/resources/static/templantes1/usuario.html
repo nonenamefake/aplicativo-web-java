@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ver Usuarios - TechStore</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">TechStore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
+          <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link" href="politica.html">Política y Privacidad</a></li>
+          <li class="nav-item"><a class="nav-link active" href="usuarios.html">Ver Usuarios</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Lista de Usuarios -->
+  <section class="container my-5">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0">Usuarios Registrados</h2>
+          <span class="badge bg-primary rounded-pill" id="usersCount">0 usuarios</span>
+        </div>
+        
+        <div class="card shadow-sm">
+          <div class="card-header bg-light">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="searchUsers" placeholder="Buscar usuarios...">
+              </div>
+              <div class="col-md-6 text-end">
+                <button class="btn btn-outline-secondary" id="refreshUsers">
+                  <span>🔄</span> Actualizar
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Fecha de Registro</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTable">
+                  <tr>
+                    <td colspan="5" class="text-center py-4">
+                      <div class="text-muted">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?auto=format&fit=crop&w=100&q=80" 
+                             alt="Sin usuarios" class="mb-3" style="width: 60px;">
+                        <p>No hay usuarios registrados</p>
+                        <a href="registro.html" class="btn btn-primary btn-sm">Registrar primer usuario</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">Mostrando <span id="showingCount">0</span> de <span id="totalCount">0</span> usuarios</small>
+              <div>
+                <button class="btn btn-sm btn-outline-primary" id="prevPage" disabled>← Anterior</button>
+                <button class="btn btn-sm btn-outline-primary ms-2" id="nextPage" disabled>Siguiente →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Estadísticas -->
+        <div class="row mt-4">
+          <div class="col-md-4">
+            <div class="card text-center bg-info text-white">
+              <div class="card-body">
+                <h5>Total Usuarios</h5>
+                <h3 id="totalUsers">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center bg-success text-white">
+              <div class="card-body">
+                <h5>Usuarios Activos</h5>
+                <h3 id="activeUsers">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center bg-warning text-white">
+              <div class="card-body">
+                <h5>Nuevos Hoy</h5>
+                <h3 id="newToday">0</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p>&copy; 2024 TechStore. Todos los derechos reservados.</p>
+      <p class="small">
+        <a href="politica.html" class="text-white">Política de Privacidad</a> | 
+        <a href="contacto.html" class="text-white">Contacto</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - TechGear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/Contacto.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+</head>
+<body>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/images/techGear.png" alt="Logo de TechGear" class="d-inline-block align-text-top me-2 w-50 h-50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/TerminosCondiciones">Terminos y condiciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/politicas">Politica de privacidad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Find">Productos</a> <!-- Enlace actualizado para la nueva sección -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Carrito">Carrito</a>
+                        </li>
+                        <!-- Login / User dropdown -->
+                        <!-- show login button when NOT authenticated as a client (ROLE_USER) -->
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Registrar">
+                            <i class="fas fa-sign-in-alt me-1"></i>Registrar
+                            </a>
+                        </li>
+
+                        <!-- show user dropdown only when authenticated as a client -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('USER')">
+                            <a class="nav-link dropdown-toggle btn btn-outline-secondary" type="button" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-1" ></i>
+                                <span th:text="${currentUser != null ? currentUser.firstName : #authentication.name}">Usuario</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/mi-cuenta}">Cuenta</a></li>
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/Orders}">Compras</a></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" style="margin:0">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5">
+        <div id="contact" class="contact-area section-padding">
+            <div class="container">										
+                <div class="section-title text-center">
+                    <h1>Consultas</h1>
+                    <p>Déjanos un mensaje y te responderemos tan pronto como sea posible.</p>
+                </div>					
+                <div class="row">
+                    <div class="col-lg-7">	
+                        <div class="contact">
+                            <div th:if="${success}" class="alert alert-success" role="alert">
+                                <span th:text="${success}"></span>
+                            </div>
+                            <form class="form" name="enq" th:object="${consulta}" method="post" th:action="@{/Contacto/save}">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" required="required">
+                                        <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="email" th:field="*{email}" class="form-control" placeholder="Email" required="required">
+                                        <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" th:field="*{asunto}" class="form-control" placeholder="Asunto" required="required">
+                                        <div class="text-danger" th:if="${#fields.hasErrors('asunto')}" th:errors="*{asunto}"></div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea rows="6" th:field="*{mensaje}" class="form-control" placeholder="Mensaje" required="required"></textarea>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"></div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                        <button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-contact-bg" title="Submit Your Message!">Enviar Mensaje</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!--- END COL --> 
+                    <div class="col-lg-5">
+                        <div class="single_address">
+                            <i class="fa fa-map-marker"></i>
+                            <h4>Nuestra direccion</h4>
+                            <p>Av. de la Marina 2000</p>
+                        </div>
+                        <div class="single_address">
+                            <i class="fa fa-envelope"></i>
+                            <h4>Envía un mensaje</h4>
+                            <p><a href="#" class="__cf_email__" data-cfemail="450c2b232a05203d24283529206b262a28">contacto@techgear.com</a></p>
+                        </div>
+                        <div class="single_address">
+                            <i class="fa fa-phone"></i>
+                            <h4>Llámanos</h4>
+                            <p>+51 925534561</p>
+                        </div>
+                        <div class="single_address">
+                            <i class="fa fa-clock-o"></i>
+                            <h4>Horario de Atencion</h4>
+                            <p>Lun - Vie: 08:00 - 18:00. <br>Sáb: 10:00 - 15:00</p>
+                        </div>					
+                    </div><!--- END COL --> 
+                </div><!--- END ROW -->
+            </div><!--- END CONTAINER -->	
+        </div>
+    </main>
+
+    <footer class="bg-primary mt-auto py-5 pb-2 footer-custom text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Enlaces Importantes</h5>
+                    <ul class="list-unstyled">
+
+                        <li class="mb-2"><a href="/TerminosCondiciones" class="text-decoration-none text-white">Términos y Condiciones</a></li>
+                        <li class="mb-2"><a href="/politicas" class="text-decoration-none text-white">Política de Privacidad</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Libro de Reclamaciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Nosotros</a></li>
+
+                        <li class="mb-2"><a href="/Contacto" class="text-decoration-none text-white">Contácto</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white">Ver productos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Contáctanos</h5>
+                    <p class="text-white mb-1 small">
+                        Para estado de pedidos o problemas de entrega, escríbenos a: <br>
+                        <a href="mailto:contacto@techgear.com" class="text-decoration-none text-white">contacto@techgear.com</a>
+                    </p>
+
+
+                    <p class="text-white small">Atencion: Lun - Vie 10 AM - 6 PM <br>Sáb: 10:00 - 15:00</p>
+
+                    <p class="text-white mb-1 small">
+                        Cambios y Reemplazos: <br>
+                        <a href="#" class="text-decoration-none text-white fw-bold">Solicitar aquí</a>
+                    </p>
+
+                    <p class="text-white small fst-italic">Nota: Las solicitudes deben hacerse dentro de los 7 días de la entrega.</p>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 class="fw-bold mb-3">Sé Parte de TechGear</h5>
+                    <p class="text-white small">Únete para obtener 10% de descuento en tu primera compra y las últimas novedades y ofertas.</p>
+                    
+                    <form class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Introduce tu email" aria-label="Introduce tu email">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+
+                    <div class="social-icons mt-3 text-center">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fa-lg fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fa-lg mx-3 fs-4"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-tiktok fa-lg fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-3 border-secondary-subtle"> 
+            
+            <div class="row align-items-center ">
+                <div class="container text-center">
+                    <p class="mb-2">&copy; 2023 TechGear. Todos los derechos reservados. </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="../static/JavaScript/Login.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript"></script>
+	
+    
+    
+</body>
+</html>

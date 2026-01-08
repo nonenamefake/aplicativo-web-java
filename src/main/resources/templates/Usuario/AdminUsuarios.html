@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Admin Cuentas</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/AdminLogos.css">
+    <link rel="stylesheet" href="/css/bootstrap-admin.css">
+    <link rel="stylesheet" href="/css/templatemo-style-admin.css">
+    <link rel="stylesheet" href="/css/AdminCuentas.css">
+  </head>
+
+  <body id="reportsPage">
+    <div class="" id="home">
+      <nav class="navbar navbar-expand-xl">
+        <div class="container h-100">
+          <a class="navbar-brand" href="/Panel_Admin">
+            <h1 class="tm-site-title mb-0">Administrador de productos</h1>
+          </a>
+
+          <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars tm-nav-icon"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto h-100">
+              <li class="nav-item">
+                <a class="nav-link " href="/Panel_Admin">
+                  <i class="fas fa-tachometer-alt"></i>
+                    Panel
+                  <span class="sr-only"></span>
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-file-alt"></i>
+                    <span>
+                      Informe <i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                    
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Reporte Productos</a>
+                  <a class="dropdown-item" href="#">Comentarios</a>
+                  <a class="dropdown-item" href="#">Libro de Reclamacion</a>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/Admin_Lista_Produstos">
+                  <i class="fas fa-shopping-cart"></i>
+                    Productos
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <i class="far fa-user"></i>
+                    Usuarios
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cog"></i>
+                  <span>
+                    Ajustes <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/Admin_Perfil">Perfil</a>
+                  <a class="dropdown-item" href="#">Facturación</a>
+                </div>
+
+              </li>
+            </ul>
+                
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <form th:action="@{/logoutemp}" method="post" style="margin:0">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container my-5">
+    <h3 class="mb-4 text-center">Detalles de Clientes</h3>
+
+    <!-- Contenedor con scroll -->
+    <div class="scroll-table-container shadow-sm">
+      <table class="table table-bordered table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th class="text-center">Modificar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Juan Pérez</td>
+            <td>Av. Siempre Viva 123</td>
+            <td>+51 987 654 321</td>
+            <td>juanperez@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="Eliminar">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Ana Gómez</td>
+            <td>Calle Falsa 456</td>
+            <td>+51 912 345 678</td>
+            <td>ana.gomez@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="Eliminar">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Pedro Torres</td>
+            <td>Jr. Los Cedros 789</td>
+            <td>+51 999 888 777</td>
+            <td>pedro.torres@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="Eliminar">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          <!-- Agrega más filas de ejemplo para probar el scroll -->
+          <tr><td>4</td><td>Laura Díaz</td><td>Av. Perú 999</td><td>+51 922 555 333</td><td>laura.diaz@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1"><i class="bi bi-pencil-square"></i></button>
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+            </td>
+          </tr>
+          <tr><td>5</td><td>Carlos Ramos</td><td>Jr. Miraflores 212</td><td>+51 933 444 222</td><td>carlos.ramos@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1"><i class="bi bi-pencil-square"></i></button>
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+            </td>
+          </tr>
+          <tr><td>6</td><td>María López</td><td>Av. Los Pinos 456</td><td>+51 955 666 111</td><td>maria.lopez@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1"><i class="bi bi-pencil-square"></i></button>
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+            </td>
+          </tr>
+          <tr><td>7</td><td>José Vargas</td><td>Jr. Grau 852</td><td>+51 977 555 111</td><td>jose.vargas@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1"><i class="bi bi-pencil-square"></i></button>
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+            </td>
+          </tr>
+                    <tr>
+            <td>3</td>
+            <td>Pedro Torres</td>
+            <td>Jr. Los Cedros 789</td>
+            <td>+51 999 888 777</td>
+            <td>pedro.torres@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="Eliminar">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+                    <tr>
+            <td>3</td>
+            <td>Pedro Torres</td>
+            <td>Jr. Los Cedros 789</td>
+            <td>+51 999 888 777</td>
+            <td>pedro.torres@example.com</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-primary me-1" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="Eliminar">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+      </div>
+
+      <footer class="tm-footer row tm-mt-small">
+          <div class="col-12 font-weight-light">
+              <p class="text-center text-white mb-0 px-4 small">
+                &copy; <b>2023</b> TechGear. Todos los derechos reservados.
+              </p>
+          </div>
+      </footer>
+    </div>
+
+    <script src="/JavaScript/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="/JavaScript/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

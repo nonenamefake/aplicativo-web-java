@@ -1,0 +1,45 @@
+/* Estilos para Modal de Login (agregar al final de style.css) */
+
+/* Borde tecnológico para modal */
+
+.border-tech {
+    border: 1px solid rgba(0, 255, 255, 0.3) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Inputs del formulario en modal */
+.modal .form-control {
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: #fff !important;
+}
+
+.modal .form-control:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Botón cerrar en modal */
+.modal .btn-close-white {
+    filter: invert(1);
+}
+
+/* Enlaces en modal */
+.modal a.text-tech {
+    color: #00ffff !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.modal a.text-tech:hover {
+    color: #007bff !important;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+
+/* Ajustes responsive para modal */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 1rem;
+    }
+}

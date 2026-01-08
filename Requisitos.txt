@@ -1,0 +1,9 @@
+requisito para programa en visual code:
+-spring boot extensión pack
+-java extensión pack for java
+-Maven for java
+-Project manager for java
+-lanjauje support for java by red hat
+-debugger for java
+
+aparte de visual code para que funsione es tener instalado el SDK de java

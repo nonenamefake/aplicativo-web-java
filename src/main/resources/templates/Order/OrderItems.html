@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechGear - Detalle del Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/images/techGear.png" alt="Logo de TechGear" class="d-inline-block align-text-top me-2 w-50 h-50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/TerminosCondiciones">Terminos y condiciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/politicas">Politica de privacidad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Find">Productos</a> <!-- Enlace actualizado para la nueva sección -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Carrito">Carrito</a>
+                        </li>
+                        <!-- Login / User dropdown -->
+                        <!-- show login button when NOT authenticated as a client (ROLE_USER) -->
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!hasRole('USER')">
+                            <a class="btn btn-outline-light ms-2" href="/Registrar">
+                            <i class="fas fa-sign-in-alt me-1"></i>Registrar
+                            </a>
+                        </li>
+
+                        <!-- show user dropdown only when authenticated as a client -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('USER')">
+                            <a class="nav-link dropdown-toggle btn btn-outline-secondary" type="button" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-1" ></i>
+                                <span th:text="${currentUser != null ? currentUser.firstName : #authentication.name}">Usuario</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/mi-cuenta}">Cuenta</a></li>
+                                <li><a class="dropdown-item" th:if="${currentUser != null}" th:href="@{/Orders}">Compras</a></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" style="margin:0">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 th:text="'Pedido #' + (${order != null} ? ${order.id} : '')">Detalle del Pedido</h2>
+            <a class="btn btn-secondary" href="/Orders">Volver a mis pedidos</a>
+        </div>
+
+        <div th:if="${order == null}" class="alert alert-warning">Pedido no encontrado.</div>
+
+        <div th:if="${order != null}">
+            <div class="mb-3">
+                <strong>Estado:</strong> <span th:text="${order.status}">PENDIENTE</span><br/>
+                <strong>Fecha:</strong> <span th:text="${order.createdAt}">01/01/2024</span><br/>
+                <strong>Total:</strong> <span th:text="${order.total}">$0.00</span>
+            </div>
+
+            <div th:if="${items == null or #lists.isEmpty(items)}" class="alert alert-info">Este pedido no tiene items.</div>
+
+            <div th:if="${items != null and !#lists.isEmpty(items)}" class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${items}">
+                            <td th:text="${item.product != null ? (item.product.name != null ? item.product.name : item.product.title) : 'Producto'}">Producto</td>
+                            <td th:text="${item.quantity}">1</td>
+                            <td th:text="${item.unitPrice}">$0.00</td>
+                            <td th:text="${item.unitPrice * item.quantity}">$0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-primary mt-auto py-5 pb-2 footer-custom text-white">
+        <div class="container text-center">
+            <p class="mb-2">&copy; 2023 TechGear. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
