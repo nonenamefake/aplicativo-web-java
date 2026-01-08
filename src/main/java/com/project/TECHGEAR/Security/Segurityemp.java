@@ -25,7 +25,6 @@ public class Segurityemp {
         http.securityMatcher( "/usuario/**","/empleado/**", "/producto/**","/Consultas/**", "/loginemp", "/loginempend","/logoutemp");
         http.securityContext(sc -> sc.securityContextRepository(employeeSecurityContextRepository()));
         return http
-            // register employee authentication provider
             .authenticationProvider(empleadoAuthProvider)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/css/**", "/JavaScript/**", "/images/**", "/static/**", "/webfonts/**").permitAll()
@@ -41,7 +40,6 @@ public class Segurityemp {
             )
             .logout(config -> config
                 .logoutUrl("/logoutemp")
-                // don't invalidate session so other security contexts are preserved
                 .invalidateHttpSession(false)
                 .addLogoutHandler(removeEmployeeSecurityContext())
                 .logoutSuccessUrl("/")

@@ -23,11 +23,9 @@ public class Control {
     private ProductImageService productImageService;
     @GetMapping("")
     public String index(Model model) {
-        // Populate two small product lists for the homepage sections
         List<Product> tarjetasVideo = productService.buscarPorCategoria("Tarjeta de video");
         List<Product> gabinetes = productService.buscarPorCategoria("Gabinete");
 
-        // Load images for items (if available)
         tarjetasVideo.forEach(p -> p.setImages(productImageService.getByProductId(p.getId())));
         gabinetes.forEach(p -> p.setImages(productImageService.getByProductId(p.getId())));
 

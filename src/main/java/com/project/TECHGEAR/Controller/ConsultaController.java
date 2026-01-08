@@ -24,7 +24,6 @@ public class ConsultaController {
     }
         @GetMapping("/Contacto")
     public String contacto(Model model) {
-        // prepare an empty Consulta model for the contact form
         com.project.TECHGEAR.Model.Consulta c = new com.project.TECHGEAR.Model.Consulta();
         model.addAttribute("consulta", c);
         return "Contacto";

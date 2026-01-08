@@ -26,7 +26,6 @@ public class Security {
     @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationSuccessHandler successHandler, DaoAuthenticationProvider usuarioAuthProvider)
                                                    throws Exception{
-    // ensure this chain uses a dedicated security context attribute for user logins
     http.securityContext(sc -> sc.securityContextRepository(userSecurityContextRepository()));
 
     return http.authenticationProvider(usuarioAuthProvider).authorizeHttpRequests(auth -> auth
@@ -78,7 +77,6 @@ public class Security {
                 return;
             }
 
-            // default to client landing page
             response.sendRedirect(request.getContextPath() + "/");
         };
     }
@@ -99,7 +97,6 @@ public class Security {
         };
     }
 
-    // Separate filter chain for empleado endpoints so they use Spring Security's default login page.
 
 }//fin de la clase
 

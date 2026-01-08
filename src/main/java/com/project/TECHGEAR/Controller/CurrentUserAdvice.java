@@ -18,7 +18,6 @@ public class CurrentUserAdvice {
     @ModelAttribute("currentUser")
     public User currentUser(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) return null;
-        // Only load app User when the logged in principal is a client (role USER)
         boolean isUser = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
         if (!isUser) return null;
 

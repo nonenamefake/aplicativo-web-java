@@ -31,7 +31,6 @@ public class EmpleadoService implements UserDetailsService{
         return empleadorepositorio.findById(id).orElseThrow(() -> new RuntimeException("Empleado not found with id: " + id));
     }
     public void save(Empleado empleado){
-        // Encode employee password before saving (avoid double-encoding)
         if (empleado.getPassword() != null && !empleado.getPassword().isEmpty()) {
             if (!empleado.getPassword().startsWith("$2a$") && !empleado.getPassword().startsWith("$2b$")) {
                 empleado.setPassword(passwordEncoder.encode(empleado.getPassword()));
@@ -43,7 +42,6 @@ public class EmpleadoService implements UserDetailsService{
         if (!empleadorepositorio.existsById(empleado.getIdempleado())) {
             throw new RuntimeException("Empleado not found with id: " + empleado.getIdempleado());
         }
-        // Encode password if it was changed
         if (empleado.getPassword() != null && !empleado.getPassword().isEmpty()) {
             if (!empleado.getPassword().startsWith("$2a$") && !empleado.getPassword().startsWith("$2b$")) {
                 empleado.setPassword(passwordEncoder.encode(empleado.getPassword()));

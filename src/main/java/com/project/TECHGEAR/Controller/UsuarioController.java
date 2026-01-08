@@ -57,19 +57,16 @@ public class UsuarioController {
                            Model model,
                            RedirectAttributes redirectAttributes,
                            @RequestParam(required = false) String passwordConfirm) {
-        // Validar que la contraseña no sea nula o vacía
         if (usuario.getPassword() == null || usuario.getPassword().isBlank()) {
             result.rejectValue("password", "error.password", "La contraseña es obligatoria");
         }
 
 
-        // Validar que no haya errores de validación en los campos anotados
         if (result.hasErrors()) {
             model.addAttribute("user", usuario);
             return "Usuario/register";
         }
 
-        // Validar unicidad de username
         if (usuarioService.existsByUsername(usuario.getUsername())) {
             result.rejectValue("username", "error.username", "El nombre de usuario ya está en uso");
             model.addAttribute("user", usuario);
@@ -77,7 +74,6 @@ public class UsuarioController {
             return "Usuario/register";
         }
 
-        // Validar unicidad de email
         if (usuarioService.existsByEmail(usuario.getEmail())) {
             result.rejectValue("email", "error.email", "El email ya está registrado");
             model.addAttribute("user", usuario);
@@ -97,7 +93,6 @@ public class UsuarioController {
                             BindingResult result, 
                             Model model,
                             RedirectAttributes redirectAttributes) {
-        // password must be provided when registering
         if (usuario.getPassword() == null || usuario.getPassword().isBlank()) {
             result.rejectValue("password", "error.password", "La contraseña es obligatoria");
         }
@@ -107,7 +102,6 @@ public class UsuarioController {
             return "Usuario/register";
         }
         
-        // Validar unicidad de username
         if (usuarioService.existsByUsername(usuario.getUsername())) {
             result.rejectValue("username", "error.username", "El nombre de usuario ya está en uso");
             model.addAttribute("user", usuario);
@@ -115,7 +109,6 @@ public class UsuarioController {
             return "Usuario/register";
         }
         
-        // Validar unicidad de email
         if (usuarioService.existsByEmail(usuario.getEmail())) {
             result.rejectValue("email", "error.email", "El email ya está registrado");
             model.addAttribute("user", usuario);
@@ -144,7 +137,6 @@ public class UsuarioController {
             return "Usuario/nuevousuario";
         }
         
-        // Validar unicidad de username
         if (usuarioService.existsByUsername(usuario.getUsername())) {
             result.rejectValue("username", "error.username", "El nombre de usuario ya está en uso");
             model.addAttribute("usuario", usuario);
@@ -152,7 +144,6 @@ public class UsuarioController {
             return "Usuario/nuevousuario";
         }
         
-        // Validar unicidad de email
         if (usuarioService.existsByEmail(usuario.getEmail())) {
             result.rejectValue("email", "error.email", "El email ya está registrado");
             model.addAttribute("usuario", usuario);
@@ -198,7 +189,6 @@ public class UsuarioController {
         
         User now = usuarioService.get(id);
         
-        // Validar unicidad de username (solo si cambió)
         if (usuario.getUsername() != null && now.getUsername() != null &&
             !now.getUsername().equals(usuario.getUsername()) && 
             usuarioService.existsByUsername(usuario.getUsername())) {
@@ -209,7 +199,6 @@ public class UsuarioController {
             return  "Usuario/EditarUsuario";
         }
         
-        // Validar unicidad de email (solo si cambió)
         if (usuario.getEmail() != null && now.getEmail() != null &&
             !now.getEmail().equals(usuario.getEmail()) && 
             usuarioService.existsByEmail(usuario.getEmail())) {
@@ -227,7 +216,6 @@ public class UsuarioController {
         now.setLastName(usuario.getLastName());
         now.setUpdatedAt(Timestamp.from(Instant.now()));
         usuarioService.update(now);
-        // After update, redirect appropriately
         return "redirect:/usuario";
     }
 
@@ -245,7 +233,6 @@ public class UsuarioController {
         
         User now = usuarioService.get(id);
         
-        // Validar unicidad de username (solo si cambió)
         if (usuario.getUsername() != null && now.getUsername() != null &&
             !now.getUsername().equals(usuario.getUsername()) && 
             usuarioService.existsByUsername(usuario.getUsername())) {
@@ -256,7 +243,6 @@ public class UsuarioController {
             return "Usuario/miCuenta";
         }
         
-        // Validar unicidad de email (solo si cambió)
         if (usuario.getEmail() != null && now.getEmail() != null &&
             !now.getEmail().equals(usuario.getEmail()) && 
             usuarioService.existsByEmail(usuario.getEmail())) {
@@ -286,7 +272,6 @@ public class UsuarioController {
                 
             }
         }
-        // After update, redirect appropriately
          return "redirect:/mi-cuenta";
 
     }

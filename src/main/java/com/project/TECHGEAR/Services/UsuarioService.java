@@ -34,7 +34,6 @@ public class UsuarioService implements UserDetailsService {
     public void save(User usuario){
         // Codificar la contraseña con BCrypt antes de guardar
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
-            // Solo codificar si no está ya codificada (verificar si empieza con $2a$ o $2b$)
             if (!usuario.getPassword().startsWith("$2a$") && !usuario.getPassword().startsWith("$2b$")) {
                 usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             }
@@ -64,7 +63,6 @@ public class UsuarioService implements UserDetailsService {
         }
         // Si se está actualizando la contraseña, codificarla con BCrypt
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
-            // Solo codificar si no está ya codificada (verificar si empieza con $2a$ o $2b$)
             if (!usuario.getPassword().startsWith("$2a$") && !usuario.getPassword().startsWith("$2b$")) {
                 usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             }
@@ -84,12 +82,11 @@ public class UsuarioService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String usarname) 
                                          throws UsernameNotFoundException {
-       // First try to find a registered regular user
        User user = usuariorepositorio.findByUsername(usarname);
        if (user != null) {
            var springUser = org.springframework.security.core.userdetails.User.withUsername(user.getUsername())
                    .password(user.getPassword())
-                   .roles("USER") // default role for customers
+                   .roles("USER")
                    .build();
            return springUser;
        }
